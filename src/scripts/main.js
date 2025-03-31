@@ -1,5 +1,7 @@
 'use strict';
 
+const { errors } = require("@linthtml/linthtml/messages");
+
 const body = document.body;
 
 function addSuccessMessage(message) {
@@ -18,7 +20,7 @@ function addErrorMessage(message) {
 
 const promise1 = new Promise((resolve, reject) => {
   document.addEventListener('click', () => {
-    return resolve('First promise was resolved');
+    resolve('First promise was resolved');
   });
 
   setTimeout(() => {
@@ -39,6 +41,7 @@ const promise2 = new Promise((resolve) => {
 });
 
 promise2.then(addSuccessMessage);
+promise2.catch(new Error('Error in promise2'));
 
 const promise3 = new Promise((resolve) => {
   let leftClick = false;
@@ -60,3 +63,4 @@ const promise3 = new Promise((resolve) => {
 });
 
 promise3.then(addSuccessMessage);
+promise3.catch(new Error('Error in promise3'));
